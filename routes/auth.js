@@ -16,6 +16,7 @@ router.post('/createuser', [
 ], async (req, res) => {
   // If there are errors, return Bad request and the errors
   const errors = validationResult(req);
+  let success = false;
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
   }
@@ -39,11 +40,11 @@ router.post('/createuser', [
         id: user.id
       }
     }
-    const authtoken = jwt.sign(data, JWT_SECRET);
-
+    const authToken = jwt.sign(data, JWT_SECRET);
+    success = true
 
     // res.json(user)
-    res.json({ authtoken })
+    res.json({ authToken, success })
 
   } catch (error) {
     console.error(error.message);
@@ -83,9 +84,9 @@ router.post('/login', [
         id: user.id
       }
     }
-    const authtoken = jwt.sign(data, JWT_SECRET);
+    const authToken = jwt.sign(data, JWT_SECRET);
     success = true;
-    res.json({ success, authtoken })
+    res.json({ success, authToken })
 
   } catch (error) {
     console.error(error.message);
