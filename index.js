@@ -17,7 +17,7 @@ app.use(cors());
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/notes', require('./routes/notes'));
 app.get('/', (req, res) => {
-    res.send('Hello from index.js');
+    res.send('Hello');
 });
 
 app.listen(port, ()=>{
